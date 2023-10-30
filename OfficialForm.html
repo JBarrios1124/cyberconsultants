@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details Form</title>
+    <style>
+        .remove-task-button{
+            background-color: #f23d3d;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor:pointer;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("images/image.jpg");
+            position: relative;
+            margin: 100;
+            padding: 0;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: #a0a4a4d3;
+            padding: 50px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .project-header {
+            background-color: #094989e8;
+            color: #fffdfd;
+            padding: 1px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 23px;
+        }
+        p{
+            font-size: 26px;
+        }
+        .project-header h1 {
+            margin: 1;
+        }
+        .project-info {
+            margin-top: 30px;
+        }
+        .project-info h2 {
+            border-bottom: 1px solid #5e6061;
+            padding-bottom: 15px;
+        }
+        .project-info label {
+            display: block;
+            font-weight:bold;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+        .project-info input[type="text"],
+        .project-info input[type="date"] {
+            width: 100%;
+            padding: 5px;
+            border: 2px solid #6c7070;
+            border-radius: 3px;
+        }
+        .task-list {
+            margin-top: 30px;
+        }
+        .task-list h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .task-item {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 0px ;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            font-weight:bold;
+            font-size: 20px;
+        }
+        .task-item h3 {
+            margin: 20;
+        }
+        .task-item p {
+            margin: 10px 0;
+        }
+        .task-item.completed {
+            background-color: #399bbc;
+        }
+        .task-item.in-progress {
+            background-color: #5da972;
+        }
+        .task-item.overdue {
+            background-color: #f8d7da;
+        }
+        .add-task-button {
+            display: block;
+            background-color: #094989e8;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        img {
+            position: fixed;
+            left: 15px;
+            bottom: 44px;
+        }
+        .enlarged-input{
+            width:365px;
+            height: 20px;
+        }
+
+        .enlarged-input2{
+            width:500px;
+            height: 100px;
+        }
+        
+     
+  
+    
+    </style>
+</head>
+<body> 
+    <div class="container">
+        <div class="project-header">
+            <h1>Project Initiation Request</h1>
+            <p>Work Order</p>
+        </div>
+        <div class="project-info">
+            <h2>Project Information</h2>
+            <form>
+
+                <label for="projectID">Project ID:</label>
+                <input type="text" id="projectID" name="projectID" required><br> 
+
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" name="projectName" required><br>
+
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="companyName" required><br> 
+
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date" required><br>
+
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end-date" required><br>
+            </form>
+        </div>
+        <div class="task-list">
+            <h2>Task List</h2>
+           
+        </div>
+        <div id="tasks">
+            <!-- Task details will be added here dynamically -->
+        </div>
+        <button type="button" id="addTask" class="add-task-button">Add Task</button><br><br>
+        <button type="button" id="submitForm" class="add-task-button">Submit</button>
+
+        <!-- <button type="button" id="submitForm" class="add-task-button">Submit</button> -->
+    </div>
+
+    <script>
+        
+        function removeTask(button){
+                var taskItem = button.parentElement;
+                taskItem.parentElement.removeChild(taskItem);
+        }
+        
+        document.getElementById("addTask").addEventListener("click", function () {
+            var taskCount = document.querySelectorAll('.task').length + 1;
+
+            var taskDiv = document.createElement('div');
+            taskDiv.classList.add('task', 'task-item');
+            taskDiv.classList.add(taskCount % 2 === 0 ? 'in-progress' : 'completed');
+
+            taskDiv.innerHTML = `
+                <h3>Task ${taskCount}</h3>
+                
+                <label for="taskName${taskCount}">Task ${taskCount} Name:</label>
+                <input type="text" id="taskName${taskCount}" name="taskName${taskCount}" class="enlarged-input" placeholder="Enter Task Name..."required><br><br>
+                <label for="taskDescription${taskCount}">Task ${taskCount} Description:</label><br></br>
+                <textarea type="text" id="taskDescription${taskCount}" name="taskDescription${taskCount}" class="enlarged-input2"placeholder="Enter Task Description..."required></textarea><br></br>
+                <label for="taskStartDate${taskCount}">Task ${taskCount} Start Date:</label>
+                <input type="date" id="taskStartDate${taskCount}" name="taskStartDate${taskCount}" required><br><br>
+                
+                <label for="taskEndDate${taskCount}">Task ${taskCount} End Date:</label>
+                <input type="date" id="taskEndDate${taskCount}" name="taskEndDate${taskCount}" required><br><br>
+                
+                <label for="taskStatus${taskCount}">Task ${taskCount} Status:</label>
+                <select id="taskStatus${taskCount}" name="taskStatus${taskCount}" class="StatusView" required>
+                    <option value="Not Started">Not Started</option>
+                    <option value="Delayed">Delayed</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select><br><br>
+                <button class="remove-task-button" onclick="removeTask(this)">Remove</button>
+            `;
+
+            document.getElementById("tasks").appendChild(taskDiv);
+
+        });
+    </script>
+</body>
+</html>
+</div>
+
+
+<script>
+    function removeTask(button) {
+        var taskItem = button.parentElement;
+        taskItem.parentElement.removeChild(taskItem);
+    }
+
+    document.getElementById("addTask").addEventListener("click", function () {
+        // ... Your existing code for adding tasks ...
+    });
+
+    document.getElementById("submitForm").addEventListener("click", function () {
+        // Capture project information
+        const projectID = document.getElementById("projectID").value;
+        const projectName = document.getElementById("projectName").value;
+        const companyName = document.getElementById("companyName").value;
+        const startDate = document.getElementById("start-date").value;
+        const endDate = document.getElementById("end-date").value;
+
+        // Capture task information
+        const taskElements = document.querySelectorAll('.task-item');
+        const tasksData = [];
+
+        taskElements.forEach((taskElement) => {
+            const taskDescription = taskElement.querySelector('input[type="text"]').value;
+            const taskDate = taskElement.querySelector('input[type="date"]').value;
+            const taskStatus = taskElement.querySelector('select').value;
+
+            tasksData.push({
+                description: taskDescription,
+                date: taskDate,
+                status: taskStatus,
+            });
+        });
+
+        // Create an object to hold all data
+        const formData = {
+            projectID,
+            projectName,
+            companyName,
+            startDate,
+            endDate,
+            tasks: tasksData,
+        };
+
+           // Convert the data to JSON format
+           const jsonData = JSON.stringify(formData);
+
+            // Create a Blob (Binary Large Object) with the JSON data
+            const blob = new Blob([jsonData], { type: "application/json" });
+
+             // Create a download link
+             const a = document.createElement("a");
+             a.href = URL.createObjectURL(blob);
+             a.download = "project_data.json";
+             a.style.display = "none";
+
+             // Add the link to the DOM and trigger a click event to start the download
+             document.body.appendChild(a);
+             a.click();
+
+            // Clean up by removing the link
+            document.body.removeChild(a);
+
+        // You can now process or save the data as needed, for example, by sending it to a server.
+    });
+</script>
+</body>
+</html>
