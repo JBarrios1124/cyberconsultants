@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('images/cybergif2.gif');
+        }
+        
+        header {
+            background-color: #094989e8;
+            color: #f7efef;
+            width: 535px;
+            height: 95px;
+            text-align: center;
+            border-radius: 10px 10px 10px 10px;
+        }
+        header h2{
+            font-family:'Times New Roman', Times, serif;
+            font-size: 40px;
+        }
+
+        header img{
+            position: absolute;
+            left: 80px;
+            top: 20px;
+            border-radius: 50%;
+        }
+
+        form {
+            width: 90%;
+            max-width: 500px; /* Adjust the maximum width as needed */
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style the form labels and inputs */
+        label {
+            display: block;
+            margin: 1px 100;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="password"],
+        textarea {
+            width: 95%;
+            padding: 10px;
+            margin: 4px 0;
+            border: 1px solid #094989e8;
+            border-radius: 1px;
+        }
+
+        input[type="submit"] {
+            background-color: #094989e8;
+            color: #f7efef;
+            padding: 10px 218px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+       
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Create an Account</h2>
+        <img src="images/image.jpg" alt="LOGO" class="rounded-shape" width="400px" height="250px">
+    </header>
+    <form action="Login.html" method="get">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" placeholder="Enter First Name" required>
+        
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" placeholder="Enter Last Name" required>
+        
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" placeholder="Enter Email" required>
+        
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+        
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required placeholder="Enter Address"></textarea>
+        
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required>
+        
+        <label for="user_name">User Name:</label>
+        <input type="text" id="user_name" name="user_name" placeholder="Enter User Name " required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter Password"required>
+        
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password"required>
+ 
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
